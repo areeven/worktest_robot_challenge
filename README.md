@@ -21,3 +21,5 @@ Bonus
 • Ability to implement different rule sets for flat surface or a globe where you warp when you get out of bounds
 
 Hints: use multiple classes, TDD and a healthy approach to VCS
+
+Start time: 12:44 - 2024-03-12
