@@ -1,29 +1,29 @@
-import { Position } from "./Position";
+import { PositionManager } from "./PositionManager";
 
 export class Robot {
-  private currentPosition: Position;
+  private positionManager: PositionManager;
 
   constructor(x_pos: number, y_pos: number) {
-    this.currentPosition = new Position(x_pos, y_pos);
+    this.positionManager = new PositionManager(x_pos, y_pos);
   }
 
   getCurrentPosition() {
-    return this.currentPosition;
+    return this.positionManager.getCurrentPosition();
   }
 
   moveLeft(steps: number) {
-    this.currentPosition.x -= steps;
+    this.positionManager.moveLeft(steps);
   }
 
   moveRight(steps: number) {
-    this.currentPosition.x += steps;
+    this.positionManager.moveRight(steps);
   }
 
   moveUp(steps: number) {
-    this.currentPosition.y += steps;
+    this.positionManager.moveUp(steps);
   }
 
   moveDown(steps: number) {
-    this.currentPosition.y -= steps;
+    this.positionManager.moveDown(steps);
   }
 }

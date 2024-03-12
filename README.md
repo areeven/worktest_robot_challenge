@@ -61,3 +61,11 @@ Created jest.config.ts and tslint.json with configuration.
 
 Created my first test to check startposition for the robot, making sure it is correct at x: 0 and y: 0.
 I built the test which failed, then I created the class to set the values for the robot and the test passes.
+
+![1 passed test](./shared/one_passed_test.png "Passed")
+
+I had already written some code to make the robot move to the left right up and down, but for TDD purposes I removed that code and ran the tests first. Which of course failed. I added the code again and this time the test passed.
+
+![failed test](./shared/test_failing.png "Failed")
+
+![5 passed test](./shared/five_passing_tests.png "Passed")
