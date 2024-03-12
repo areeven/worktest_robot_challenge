@@ -69,3 +69,32 @@ I had already written some code to make the robot move to the left right up and 
 ![failed test](./shared/test_failing.png "Failed")
 
 ![5 passed test](./shared/five_passing_tests.png "Passed")
+
+---
+
+Next I want to test the direction of the Robot. I tested if the robot is facing north, as expected the test failed, since I have no code for this.
+
+```
+describe("Test robot directions N, W, E, S", () => {
+  test("Robot direction is North", () => {
+    const direction = new Direction(0, 0, EnumeratedDirection.north);
+    const currentDirection = direction.getCurrentPosition();
+    expect(currentDirection).toEqual(EnumeratedDirection.north);
+  });
+});
+```
+
+So now I want to test the Board, to see if I can set the grid to expected size. First I want to test that the grid size is 100x100.
+The test fails, since I have no code built for this.
+Creating the board where I want to set the starting position and size of the grid. My board will take in 4 values, starting position x, y, grid-width and grid-height.
+Once this is done, test runs without error.
+
+```
+describe("Test grid pattern and positioning", () => {
+  test("Grid pattern is 100x100", () => {
+    const board = new Board(0, 0, 100, 100);
+    expect(board.getWidth()).toEqual(100);
+    expect(board.getHeight()).toEqual(100);
+  });
+});
+```

@@ -27,8 +27,3 @@ export class PositionManager {
     this.currentPosition.y -= steps;
   }
 }
-
-// You can use PositionManager like this:
-// const positionManager = new PositionManager(0, 0);
-// positionManager.moveRight(5);
-// const currentPosition = positionManager.getCurrentPosition();

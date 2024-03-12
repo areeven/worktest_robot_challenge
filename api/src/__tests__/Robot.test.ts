@@ -6,6 +6,11 @@ describe("Test robot positioning", () => {
     expect(robot.getCurrentPosition()).toEqual({ x: 0, y: 0 });
   });
 
+  test("robot start position is 4,5", () => {
+    const robot = new Robot(4, 5);
+    expect(robot.getCurrentPosition()).toEqual({ x: 0, y: 0 });
+  });
+
   test("robot moves to the left", () => {
     const robot = new Robot(0, 0);
     robot.moveLeft(5);
@@ -29,4 +34,11 @@ describe("Test robot positioning", () => {
     robot.moveDown(5);
     expect(robot.getCurrentPosition()).toEqual({ x: 0, y: -5 });
   });
+
+  /* test("robot should not move further than 0", () => {
+    const robot = new Robot(0, 0);
+    robot.moveDown(5);
+    robot.moveUp(7);
+    expect(robot.getCurrentPosition()).toEqual({ x: 0, y: 0 });
+  }); */
 });

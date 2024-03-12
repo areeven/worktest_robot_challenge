@@ -1,9 +1,26 @@
-import { Position } from "./Position";
+import { PositionManager } from "./PositionManager";
+
+export enum EnumeratedDirection {
+  north = "NORTH",
+  east = "EAST",
+  south = "SOUTH",
+  west = "WEST",
+}
 
 export class Direction {
-  private currentPosition: Position;
+  private currentDirection: EnumeratedDirection;
+  private positionManager: PositionManager;
 
-  constructor(x_pos: number, y_pos: number) {
-    this.currentPosition = new Position(x_pos, y_pos);
+  constructor(
+    x_pos: number,
+    y_pos: number,
+    initialDirection: EnumeratedDirection = EnumeratedDirection.north
+  ) {
+    this.positionManager = new PositionManager(x_pos, y_pos);
+    this.currentDirection = initialDirection;
+  }
+
+  getCurrentPosition(): EnumeratedDirection {
+    return this.currentDirection;
   }
 }
