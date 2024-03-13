@@ -1,36 +1,26 @@
 import { Request, Response } from "express";
 import { Move } from "../classes/Move";
+import { EnumeratedDirection } from "../utils/interfaces/Direction";
+import Logger from "../utils/Logger";
 
-export class MoveController {
-  private move: Move;
+export class RobotController {
+  public static moveRobot(req: Request, res: Response): void {
+    try {
+      const { commands, x_pos, y_pos, initDirection, boardSize } = req.body;
 
-  constructor(move: Move) {
-    this.move = move;
-  }
+      // Validate input
+      if (!commands || !x_pos || !y_pos || !initDirection || !boardSize) {
+        throw new Error("Missing required parameters");
+      }
 
-  moveForward(req: Request, res: Response) {
-    this.move.forward();
-    res.send("Robot moved forward successfully");
-  }
+      // Create Move instance and execute commands
+      const move = new Move(commands, x_pos, y_pos, initDirection, boardSize);
+      const robot = move.getRobot();
+      const direction = move.getDirection();
 
-  moveBackward(req: Request, res: Response) {
-    this.move.back();
-    res.send("Robot moved backward successfully");
-  }
-
-  turnLeft(req: Request, res: Response) {
-    this.move.left();
-    res.send("Robot turned left successfully");
-  }
-
-  turnRight(req: Request, res: Response) {
-    this.move.right();
-    res.send("Robot turned right successfully");
-  }
-
-  executeCommands(req: Request, res: Response) {
-    const commands: string[] = req.body.commands;
-    this.move.executeCommands(commands);
-    res.send("Commands executed successfully");
+      res.status(200).json({ robot, direction });
+    } catch (error) {
+      res.status(400).json({ error: (error as Error).message });
+    }
   }
 }

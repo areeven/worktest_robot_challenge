@@ -2,6 +2,7 @@
 // Each step should be one unit in the grid
 // Test if robot can move outside the grid
 // Test if robot can move to the edge of the grid
+import request from "supertest";
 
 import { EnumeratedDirection } from "../utils/interfaces/Direction";
 import { Move } from "../classes/Move";

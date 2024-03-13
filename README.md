@@ -138,3 +138,5 @@ project-root/
 
 I installed necessary dependencies and started to create my server.ts
 Added some errorhandling middleware as well as a Logger to output to the console.
+
+Going forward I have to refactor some of my code to fit the api.

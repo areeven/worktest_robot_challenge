@@ -2,12 +2,12 @@ import { PositionManager } from "./PositionManager";
 import { EnumeratedDirection } from "../utils/interfaces/Direction";
 
 export class Robot {
-  private positionManager: PositionManager;
+  public positionManager: PositionManager;
   private moveDirection: EnumeratedDirection;
 
   constructor(x_pos: number, y_pos: number, direction: EnumeratedDirection) {
     this.positionManager = new PositionManager(x_pos, y_pos);
-    this.moveDirection = EnumeratedDirection.north;
+    this.moveDirection = direction;
   }
 
   getCurrentPosition() {
