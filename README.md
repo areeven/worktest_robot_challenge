@@ -135,3 +135,6 @@ project-root/
 |-- tsconfig.json
 |-- package.json
 ```
+
+I installed necessary dependencies and started to create my server.ts
+Added some errorhandling middleware as well as a Logger to output to the console.
