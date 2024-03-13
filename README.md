@@ -110,3 +110,28 @@ This happens,
 
 I am testing that the robot will land on the 0,0 position when giving commands: ["f", "f", "b", "b", "b"] but it instead goes out of bounds.
 I inverted the grid to increase going downwards as well with incrementing steps instead of decrementing.
+
+Updated map structure to create API
+
+```
+project-root/
+|-- api/
+|   |-- src/
+|   |   |-- classes/
+|   |   |-- configuration/
+|   |   |-- controller/
+|   |   |-- middlewares/
+|   |   |-- routes
+|   |   |   |-- Board.ts
+|   |   |   |-- Position.ts
+|   |   |   |-- Robot.ts
+|   |   |-- __tests__/
+|   |   |   |-- Robot.test.ts
+|   |   |-- utils
+|   |   |   |-- interfaces
+|   |   |   |-- Logger.ts
+|-- build/
+|-- node_modules/
+|-- tsconfig.json
+|-- package.json
+```

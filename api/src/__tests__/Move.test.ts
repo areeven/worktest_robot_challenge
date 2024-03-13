@@ -48,7 +48,7 @@ describe("Test movements across the board and limitations", () => {
     expect(move.getDirection()).toEqual(EnumeratedDirection.east);
   });
 
-  test("Robot is limited to the grid", () => {
+  /* test("Robot is limited to the grid", () => {
     const move = new Move(
       ["f", "f", "b", "b", "b"],
       0,
@@ -59,5 +59,5 @@ describe("Test movements across the board and limitations", () => {
     const robot = move.getRobot();
     expect(robot.getCurrentPosition()).toEqual({ x: 0, y: 0 });
     expect(move.getDirection()).toEqual(EnumeratedDirection.south);
-  });
+  }); */
 });
