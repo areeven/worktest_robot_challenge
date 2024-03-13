@@ -1,4 +1,5 @@
-import { Direction, EnumeratedDirection } from "../classes/Direction";
+import { Direction } from "../classes/Direction";
+import { EnumeratedDirection } from "../utils/interfaces/Direction";
 
 describe("Test robot directions N, W, E, S", () => {
   test("Robot direction is North", () => {

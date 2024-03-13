@@ -1,11 +1,5 @@
 import { PositionManager } from "./PositionManager";
-
-export enum EnumeratedDirection {
-  north = "NORTH",
-  east = "EAST",
-  south = "SOUTH",
-  west = "WEST",
-}
+import { EnumeratedDirection } from "../utils/interfaces/Direction";
 
 export class Direction {
   private currentDirection: EnumeratedDirection;

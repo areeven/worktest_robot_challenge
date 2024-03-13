@@ -3,7 +3,7 @@
 // Test if robot can move outside the grid
 // Test if robot can move to the edge of the grid
 
-import { EnumeratedDirection } from "../classes/Direction";
+import { EnumeratedDirection } from "../utils/interfaces/Direction";
 import { Move } from "../classes/Move";
 
 describe("Test movements across the board and limitations", () => {

@@ -1,5 +1,5 @@
 import { Robot } from "./Robot";
-import { EnumeratedDirection } from "./Direction";
+import { EnumeratedDirection } from "../utils/interfaces/Direction";
 import { Board } from "./Board";
 
 export class Move {
@@ -14,13 +14,13 @@ export class Move {
     initDirection: EnumeratedDirection,
     boardSize: { width: number; height: number }
   ) {
-    this.robot = new Robot(x_pos, y_pos);
+    this.robot = new Robot(x_pos, y_pos, initDirection);
     this.direction = initDirection;
     this.executeCommands(commands);
     this.board = new Board(0, 0, boardSize.width, boardSize.height);
   }
 
-  private executeCommands(commands: string[]) {
+  public executeCommands(commands: string[]) {
     for (const command of commands) {
       if (!["f", "b", "l", "r"].includes(command)) {
         throw new Error(`Command ${command} is not valid`);

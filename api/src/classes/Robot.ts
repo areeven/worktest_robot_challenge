@@ -1,17 +1,25 @@
 import { PositionManager } from "./PositionManager";
-import { Direction, EnumeratedDirection } from "./Direction";
+import { EnumeratedDirection } from "../utils/interfaces/Direction";
 
 export class Robot {
   private positionManager: PositionManager;
-  private moveDirection: Direction;
+  private moveDirection: EnumeratedDirection;
 
-  constructor(x_pos: number, y_pos: number) {
+  constructor(x_pos: number, y_pos: number, direction: EnumeratedDirection) {
     this.positionManager = new PositionManager(x_pos, y_pos);
-    this.moveDirection = new Direction(x_pos, y_pos, EnumeratedDirection.north);
+    this.moveDirection = EnumeratedDirection.north;
   }
 
   getCurrentPosition() {
     return this.positionManager.getCurrentPosition();
+  }
+
+  getMoveDirection(): EnumeratedDirection {
+    return this.moveDirection;
+  }
+
+  setMoveDirection(direction: EnumeratedDirection) {
+    this.moveDirection = direction;
   }
 
   moveLeft(steps: number) {

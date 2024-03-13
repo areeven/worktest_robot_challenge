@@ -1,1 +1,5 @@
 2024-03-13 09:50:22:5022 [35mhttp[39m: [35mServer is running on port 3000![39m
+2024-03-13 10:13:21:1321 [32minfo[39m: [32mServer connection established on http://localhost:3000[39m
+2024-03-13 10:13:21:1321 [33mwarn[39m: [33mSERVER UP AND RUNNING IN DEVELOPER MODE![39m
+2024-03-13 10:52:05:525 [32minfo[39m: [32mServer connection established on http://localhost:3000[39m
+2024-03-13 10:52:05:525 [33mwarn[39m: [33mSERVER UP AND RUNNING IN DEVELOPER MODE![39m
