@@ -3,9 +3,12 @@
 // Test if robot can move outside the grid
 // Test if robot can move to the edge of the grid
 import request from "supertest";
+import { Application } from "express";
 
-import { EnumeratedDirection } from "../utils/interfaces/Direction";
+import { EnumeratedDirection } from "../interfaces/Direction";
 import { Move } from "../classes/Move";
+
+let app: Application;
 
 describe("Test movements across the board and limitations", () => {
   test("Robot moves forward, to the south", () => {
@@ -49,7 +52,7 @@ describe("Test movements across the board and limitations", () => {
     expect(move.getDirection()).toEqual(EnumeratedDirection.east);
   });
 
-  /* test("Robot is limited to the grid", () => {
+  test("Robot is limited to the grid", () => {
     const move = new Move(
       ["f", "f", "b", "b", "b"],
       0,
@@ -60,5 +63,5 @@ describe("Test movements across the board and limitations", () => {
     const robot = move.getRobot();
     expect(robot.getCurrentPosition()).toEqual({ x: 0, y: 0 });
     expect(move.getDirection()).toEqual(EnumeratedDirection.south);
-  }); */
+  });
 });

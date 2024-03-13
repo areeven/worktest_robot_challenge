@@ -1,5 +1,5 @@
 import { Robot } from "./Robot";
-import { EnumeratedDirection } from "../utils/interfaces/Direction";
+import { EnumeratedDirection } from "../interfaces/Direction";
 import { Board } from "./Board";
 
 export class Move {
@@ -15,9 +15,9 @@ export class Move {
     boardSize: { width: number; height: number }
   ) {
     this.robot = new Robot(x_pos, y_pos, initDirection);
+    this.board = new Board(0, 0, boardSize.width, boardSize.height);
     this.direction = initDirection;
     this.executeCommands(commands);
-    this.board = new Board(0, 0, boardSize.width, boardSize.height);
   }
 
   public executeCommands(commands: string[]) {
