@@ -6,4 +6,22 @@ describe("Test robot directions N, W, E, S", () => {
     const currentDirection = direction.getCurrentPosition();
     expect(currentDirection).toEqual(EnumeratedDirection.north);
   });
+
+  test("Robot direction is West", () => {
+    const direction = new Direction(0, 0, EnumeratedDirection.west);
+    const currentDirection = direction.getCurrentPosition();
+    expect(currentDirection).toEqual(EnumeratedDirection.west);
+  });
+
+  test("Robot direction is East", () => {
+    const direction = new Direction(0, 0, EnumeratedDirection.east);
+    const currentDirection = direction.getCurrentPosition();
+    expect(currentDirection).toEqual(EnumeratedDirection.east);
+  });
+
+  test("Robot direction is South", () => {
+    const direction = new Direction(0, 0, EnumeratedDirection.south);
+    const currentDirection = direction.getCurrentPosition();
+    expect(currentDirection).toEqual(EnumeratedDirection.south);
+  });
 });

@@ -20,10 +20,10 @@ export class PositionManager {
   }
 
   moveUp(steps: number) {
-    this.currentPosition.y += steps;
+    this.currentPosition.y -= steps;
   }
 
   moveDown(steps: number) {
-    this.currentPosition.y -= steps;
+    this.currentPosition.y += steps;
   }
 }

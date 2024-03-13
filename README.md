@@ -30,7 +30,7 @@ Hints: use multiple classes, TDD and a healthy approach to VCS
 
 ---
 
-Created git repository and added my first init.
+Created a git repository and added my first init.
 Created my .gitignore with some basic values, which I will add to if needed.
 
 Map structure
@@ -57,14 +57,14 @@ npm i jest @types/jest ts-node typescript ts-jest
 tsc --init
 ```
 
-Created jest.config.ts and tslint.json with configuration.
+I created jest.config.ts and tslint.json with configuration.
 
-Created my first test to check startposition for the robot, making sure it is correct at x: 0 and y: 0.
-I built the test which failed, then I created the class to set the values for the robot and the test passes.
+I created my first test to check the starting position for the robot, making sure it is correct at x: 0 and y: 0.
+I built the test which failed, I then created the class to set the values for the robot, and the test passes.
 
 ![1 passed test](./shared/one_passed_test.png "Passed")
 
-I had already written some code to make the robot move to the left right up and down, but for TDD purposes I removed that code and ran the tests first. Which of course failed. I added the code again and this time the test passed.
+I had already written some code to make the robot move to the left, right, up, and down, but for TDD purposes, I removed that code and ran the tests first. Which, of course, failed. I added the code again, and this time the test passed.
 
 ![failed test](./shared/test_failing.png "Failed")
 
@@ -72,7 +72,7 @@ I had already written some code to make the robot move to the left right up and 
 
 ---
 
-Next I want to test the direction of the Robot. I tested if the robot is facing north, as expected the test failed, since I have no code for this.
+Next, I want to test the direction of the Robot. I tested if the robot is facing north, as expected the test failed, since I have no code for this.
 
 ```
 describe("Test robot directions N, W, E, S", () => {
@@ -84,10 +84,10 @@ describe("Test robot directions N, W, E, S", () => {
 });
 ```
 
-So now I want to test the Board, to see if I can set the grid to expected size. First I want to test that the grid size is 100x100.
+So now I want to test the Board, to see if I can set the grid to the expected size. First, I want to test that the grid size is 100x100.
 The test fails, since I have no code built for this.
-Creating the board where I want to set the starting position and size of the grid. My board will take in 4 values, starting position x, y, grid-width and grid-height.
-Once this is done, test runs without error.
+I create the board where I want to set the starting position and size of the grid. My board will take in 4 values, starting position x, y, grid-width, and grid-height.
+Once this is done, the test runs without error.
 
 ```
 describe("Test grid pattern and positioning", () => {
@@ -98,3 +98,15 @@ describe("Test grid pattern and positioning", () => {
   });
 });
 ```
+
+After I ran the test to check for the right turn, it seemed to pass even though I hadn't created that method yet. So I created an error to occur if the command was not valid. After this, the test failed, of course. I then created the method and added the command to the allowed commands.
+
+![Valid commands](./shared/error_handling.png "Validation")
+
+So now I want to test if my robot stays within the grid when moving out of bounds.
+This happens,
+
+![Out of bounds](./shared/not_limited.png "Not limited")
+
+I am testing that the robot will land on the 0,0 position when giving commands: ["f", "f", "b", "b", "b"] but it instead goes out of bounds.
+I inverted the grid to increase going downwards as well with incrementing steps instead of decrementing.
