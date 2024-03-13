@@ -1,4 +1,4 @@
-import { EnumeratedDirection } from "../interfaces/Direction";
+import { EnumeratedDirection } from "../interfaces/EnumeratedDirection";
 import { Robot } from "../classes/Robot";
 
 describe("Test robot positioning", () => {

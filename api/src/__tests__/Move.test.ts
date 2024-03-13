@@ -1,14 +1,5 @@
-// Test forward, backward, left, right
-// Each step should be one unit in the grid
-// Test if robot can move outside the grid
-// Test if robot can move to the edge of the grid
-import request from "supertest";
-import { Application } from "express";
-
-import { EnumeratedDirection } from "../interfaces/Direction";
+import { EnumeratedDirection } from "../interfaces/EnumeratedDirection";
 import { Move } from "../classes/Move";
-
-let app: Application;
 
 describe("Test movements across the board and limitations", () => {
   test("Robot moves forward, to the south", () => {
@@ -64,4 +55,17 @@ describe("Test movements across the board and limitations", () => {
     expect(robot.getCurrentPosition()).toEqual({ x: 0, y: 0 });
     expect(move.getDirection()).toEqual(EnumeratedDirection.south);
   });
+
+  test("Robot is limited to the grid, turn around", () => {
+    const move = new Move(
+      ["f", "f", "f", "f", "f", "l", "l", "f", "f", "f", "f", "f", "f"],
+      0,
+      0,
+      EnumeratedDirection.south,
+      { width: 4, height: 4 }
+    );
+    const robot = move.getRobot();
+    expect(robot.getCurrentPosition()).toEqual({ x: 0, y: 0 });
+    expect(move.getDirection()).toEqual(EnumeratedDirection.north);
+  })
 });
