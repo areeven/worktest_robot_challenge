@@ -10,10 +10,10 @@ export class Board {
     width: number,
     height: number
   ) {
-    this.xTopLeft = xTopLeft;
-    this.yTopLeft = yTopLeft;
-    this.width = width;
-    this.height = height;
+    this.xTopLeft = xTopLeft !== null && xTopLeft !== undefined ? xTopLeft : 0;
+    this.yTopLeft = yTopLeft !== null && yTopLeft !== undefined ? yTopLeft : 0;
+    this.width = width !== null && width !== undefined ? width : 0;
+    this.height = height !== null && height !== undefined ? height : 0;
   }
 
   getTopLeftCorner(): { x: number; y: number } {

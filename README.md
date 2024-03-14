@@ -30,6 +30,12 @@ Hints: use multiple classes, TDD and a healthy approach to VCS
 
 ---
 
+![Design](./shared/design.png "Design")
+
+### Interpretation
+
+My interpretation of the assignment is that I am supposed to create an api with a grid for a new robot to move around on. My thoughts about it was, do I need to build an entire REST api or is it just a simple api with actions and tests? So I will build an api with classes that can move around a robot, test cases and certain rules.
+
 Created a git repository and added my first init.
 Created my .gitignore with some basic values, which I will add to if needed.
 
@@ -45,10 +51,15 @@ project-root/
 |   |   |   |-- Robot.ts
 |   |   |-- __tests__/
 |   |   |   |-- Robot.test.ts
+|   |   |-- interfaces
 |-- build/
 |-- node_modules/
 |-- tsconfig.json
+|-- ts-lint.json
+|-- jest.config.json
 |-- package.json
+|-- .gitignore
+|-- README.md
 ```
 
 ```
@@ -109,4 +120,8 @@ This happens,
 ![Out of bounds](./shared/not_limited.png "Not limited")
 
 I am testing that the robot will land on the 0,0 position when giving commands: ["f", "f", "b", "b", "b"] but it instead goes out of bounds.
-I inverted the grid to increase going downwards as well with incrementing steps instead of decrementing.
+I inverted the grid to increase going downwards as well, with incrementing steps instead of decrementing.
+
+Continuing on to create an obstacle test to see if the robot will land on the obstacle, then test if it stops before the obstacle.
+
+![Obstacle](./shared/obstacle.png "Obstacle")

@@ -1,4 +1,4 @@
-import { EnumeratedDirection } from "../interfaces/EnumeratedDirection";
+import { EnumeratedDirection } from "../utils/interfaces/EnumeratedDirection";
 import { Move } from "../classes/Move";
 
 describe("Test movements across the board and limitations", () => {
@@ -67,5 +67,5 @@ describe("Test movements across the board and limitations", () => {
     const robot = move.getRobot();
     expect(robot.getCurrentPosition()).toEqual({ x: 0, y: 0 });
     expect(move.getDirection()).toEqual(EnumeratedDirection.north);
-  })
+  });
 });

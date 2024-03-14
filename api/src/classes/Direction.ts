@@ -1,5 +1,5 @@
 import { PositionManager } from "./PositionManager";
-import { EnumeratedDirection } from "../interfaces/EnumeratedDirection";
+import { EnumeratedDirection } from "../utils/interfaces/EnumeratedDirection";
 
 export class Direction {
   private currentDirection: EnumeratedDirection;
