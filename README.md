@@ -182,6 +182,6 @@ I created alot of tests before creating the code to make sure it would work corr
 When I first got the assignment I didn't really know where to start. But then I started breaking it down into smaller pieces, like what classes do I wanna use? What kind of tests do I want to write.
 So I started there and slowly coded my way forward.
 
-I have never used classes in JavaScript or TypeScript so it was a little bit of a challenge but I had alot of fun with it.
+I have never used classes in JavaScript or TypeScript so it was a little bit of a challenge but I had alot of fun doing it.
 
 I tried a few different ways to build the project, but I changed the code and reformatted a few times to make it more readable and clean.
