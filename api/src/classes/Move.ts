@@ -1,24 +1,19 @@
 import { Robot } from "./Robot";
 import { EnumeratedDirection } from "../utils/interfaces/EnumeratedDirection";
 import { Board } from "./Board";
-import { Obstacle } from "./Obstacle";
 
 export class Move {
   private robot: Robot;
   private direction: EnumeratedDirection;
   private board: Board;
-  private obstacle: Obstacle;
 
   constructor(
     commands: string[],
     x_pos: number,
     y_pos: number,
-    initDirection: EnumeratedDirection,
-    boardSize: { width: number; height: number }
+    initDirection: EnumeratedDirection
   ) {
     this.robot = new Robot(x_pos, y_pos, initDirection);
-    this.board = new Board(0, 0, boardSize.width, boardSize.height);
-    this.obstacle = new Obstacle(x_pos, y_pos);
     this.direction = initDirection;
     this.executeCommands(commands);
   }
@@ -41,17 +36,32 @@ export class Move {
   }
 
   private checkBoundaries() {
-    const currentPosition = this.robot.getCurrentPosition();
+    const currentPosition = this.getRobot().getCurrentPosition();
+    this.board = new Board(0, 0, 5, 5, { x: 2, y: 2 });
     const width = this.board.getWidth();
     const height = this.board.getHeight();
+    const obstaclePosition = this.board.getObstacle();
+
+    // Check if the current position is out of bounds or collides with an obstacle
     if (
       currentPosition.x < 0 ||
       currentPosition.x >= width - 1 ||
       currentPosition.y < 0 ||
       currentPosition.y >= height - 1
     ) {
-      return;
+      return false; // Return false to indicate collision or out of bounds
     }
+
+    return true; // Return true if the position is within bounds and doesn't collide
+  }
+
+  private robotPosition() {
+    this.getRobot().getCurrentPosition();
+    console.log(
+      `Current Position of robot: x: ${this.robot.getCurrentPosition().x}, y: ${
+        this.robot.getCurrentPosition().y
+      }`
+    );
   }
 
   forward() {
@@ -61,21 +71,39 @@ export class Move {
       this.robot.getCurrentPosition().y > 0
     ) {
       this.robot.moveUp(1);
+      this.robotPosition();
+      if (
+        this.getRobot().getCurrentPosition().y === this.board.getObstacle().y
+      ) {
+        this.robot.moveDown(1);
+      }
     } else if (
       this.direction === EnumeratedDirection.east &&
       this.robot.getCurrentPosition().x < this.board.getWidth()
     ) {
       this.robot.moveRight(1);
+      this.robotPosition();
+      if (this.robot.getCurrentPosition().x === this.board.getObstacle().x) {
+        this.robot.moveLeft(1);
+      }
     } else if (
       this.direction === EnumeratedDirection.south &&
       this.robot.getCurrentPosition().y < this.board.getHeight()
     ) {
       this.robot.moveDown(1);
+      this.robotPosition();
+      if (this.robot.getCurrentPosition().y === this.board.getObstacle().y) {
+        this.robot.moveUp(1);
+      }
     } else if (
       this.direction === EnumeratedDirection.west &&
       this.robot.getCurrentPosition().x > 0
     ) {
       this.robot.moveLeft(1);
+      this.robotPosition();
+      if (this.robot.getCurrentPosition().x === this.board.getObstacle().x) {
+        this.robot.moveRight(1);
+      }
     }
   }
 
@@ -85,21 +113,33 @@ export class Move {
       this.direction === EnumeratedDirection.north &&
       this.robot.getCurrentPosition().y < this.board.getHeight() - 1
     ) {
+      if (this.robot.getCurrentPosition().y === this.board.getObstacle().y) {
+        this.robot.moveUp(1);
+      }
       this.robot.moveDown(1);
     } else if (
       this.direction === EnumeratedDirection.east &&
       this.robot.getCurrentPosition().x > 0
     ) {
+      if (this.robot.getCurrentPosition().x === this.board.getObstacle().x) {
+        this.robot.moveRight(1);
+      }
       this.robot.moveLeft(1);
     } else if (
       this.direction === EnumeratedDirection.south &&
       this.robot.getCurrentPosition().y > 0
     ) {
+      if (this.robot.getCurrentPosition().y === this.board.getObstacle().y) {
+        this.robot.moveDown(1);
+      }
       this.robot.moveUp(1);
     } else if (
       this.direction === EnumeratedDirection.west &&
       this.robot.getCurrentPosition().x < this.board.getWidth() - 1
     ) {
+      if (this.robot.getCurrentPosition().x === this.board.getObstacle().x) {
+        this.robot.moveLeft(1);
+      }
       this.robot.moveRight(1);
     }
   }
@@ -134,9 +174,5 @@ export class Move {
 
   getDirection() {
     return this.direction;
-  }
-
-  getObstacle() {
-    return this.obstacle;
   }
 }

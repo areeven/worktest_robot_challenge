@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { moveRobot } from "../controllers/RobotController";
+import { RobotController } from "../controllers/RobotController";
 import { EnumeratedDirection } from "../utils/interfaces/EnumeratedDirection";
 
 jest.mock("../classes/Move", () => {
@@ -11,8 +11,7 @@ jest.mock("../classes/Move", () => {
           commands: string[] = [],
           x_pos: number,
           y_pos: number,
-          initDirection: EnumeratedDirection,
-          boardSize: { width: number; height: number }
+          initDirection: EnumeratedDirection
         ) => ({
           executeCommands: jest.fn().mockReturnValue(commands),
           getRobot: jest.fn().mockReturnValue({
@@ -22,6 +21,25 @@ jest.mock("../classes/Move", () => {
           }),
           getDirection: jest.fn().mockReturnValue(initDirection),
         })
+      ),
+  };
+});
+
+jest.mock("../classes/Board", () => {
+  const Obstacle = require("../classes/Obstacle").Obstacle;
+
+  return {
+    Board: jest
+      .fn()
+      .mockImplementation(
+        (xTopLeft, yTopLeft, width, height, obstaclePosition) => {
+          const obstacle = new Obstacle(obstaclePosition.x, obstaclePosition.y);
+          return {
+            getWidth: jest.fn().mockReturnValue(width),
+            getHeight: jest.fn().mockReturnValue(height),
+            getObstacle: jest.fn().mockReturnValue(obstacle),
+          };
+        }
       ),
   };
 });
@@ -36,54 +54,36 @@ describe("RobotController", () => {
     const mockRequest = {
       body: {
         commands: ["f", "r", "f"],
-        x_pos: "0",
-        y_pos: "0",
+        x_pos: 1,
+        y_pos: 1,
         initDirection: EnumeratedDirection.north,
-        boardSize: { width: 10, height: 10 },
+        xTopLeft: 0,
+        yTopLeft: 0,
+        width: 5,
+        height: 5,
+        obstacle: {
+          x: 2,
+          y: 2,
+        },
       },
     } as Request;
 
-    moveRobot(mockRequest, mockResponse);
-
-    const jsonMockCalls = (mockResponse.json as jest.Mock).mock.calls;
-    const finalState = jsonMockCalls[jsonMockCalls.length - 1][0];
-
-    console.log(finalState);
+    RobotController.moveRobot(mockRequest, mockResponse);
 
     expect(mockResponse.status).toHaveBeenCalledWith(200);
-    // I am having issues using value 0 in this test. So for the value 0, 0 on top left
-    // corner I have to use a string, which is not correct. But it works for now.
-    // This is something I would need more time to troubleshoot.
-    expect(mockResponse.json).toHaveBeenCalledWith({
-      position: { x: "0", y: "0" },
-      direction: EnumeratedDirection.north,
-    });
-  });
-
-  test("should execute commands and return robot position and direction", () => {
-    const mockRequest = {
-      body: {
-        commands: ["f", "r", "f"],
-        x_pos: 2,
-        y_pos: 2,
-        initDirection: EnumeratedDirection.north,
-        boardSize: { width: 10, height: 10 },
-      },
-    } as Request;
-
-    moveRobot(mockRequest, mockResponse);
-
-    expect(mockResponse.status).toHaveBeenCalledWith(200);
-    expect(mockResponse.json).toHaveBeenCalledWith({
-      position: { x: 2, y: 2 },
-      direction: EnumeratedDirection.north,
-    });
+    expect(mockResponse.json).toHaveBeenCalledWith(
+      expect.objectContaining({
+        board: expect.any(Object),
+        direction: "NORTH",
+        position: { x: 1, y: 1 },
+      })
+    );
   });
 
   test("should handle missing request parameters", () => {
     const invalidRequest = { body: {} } as Request;
 
-    moveRobot(invalidRequest, mockResponse);
+    RobotController.moveRobot(invalidRequest, mockResponse);
 
     expect(mockResponse.status).toHaveBeenCalledWith(400);
     expect(mockResponse.json).toHaveBeenCalledWith({

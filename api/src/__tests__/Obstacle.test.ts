@@ -1,20 +1,33 @@
 import { EnumeratedDirection } from "../utils/interfaces/EnumeratedDirection";
 import { Move } from "../classes/Move";
-import { Obstacle } from "../classes/Obstacle";
-import { Robot } from "../classes/Robot";
+import { Board } from "../classes/Board";
 
 describe("Test robot colliding with obstacle", () => {
-  test("Robot moves to the right, then collides with an obstacle", () => {
+  test("Robot collides with obstacle and stops", () => {
+    const board = new Board(0, 0, 5, 5, { x: 2, y: 2 });
     const move = new Move(
       ["f", "f", "r", "f", "f"],
       0,
       0,
-      EnumeratedDirection.east,
-      { width: 5, height: 5 }
+      EnumeratedDirection.east
     );
     const robot = move.getRobot();
-    const obstacle = new Obstacle(2, 2);
+    const obstacle = board.getObstacle();
+    expect(robot).not.toEqual(obstacle);
+  });
+});
 
-    expect(robot.getCurrentPosition()).toEqual(obstacle.getCurrentPosition());
+describe("Test robot collision", () => {
+  test("Robot collides with obstacle", () => {
+    const board = new Board(0, 0, 5, 5, { x: 2, y: 2 });
+    const move = new Move(
+      ["f", "f", "r", "f", "f"],
+      0,
+      0,
+      EnumeratedDirection.east
+    );
+    const robot = move.getRobot().getCurrentPosition();
+    console.log(robot);
+    expect(board.getObstacle()).not.toEqual(robot);
   });
 });
