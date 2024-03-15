@@ -7,18 +7,23 @@ export class RobotController {
   public static moveRobot = (req: Request, res: Response) => {
     try {
       const { commands, x_pos, y_pos, initDirection } = req.body;
-      const { xTopLeft, yTopLeft, width, height, x, y } = req.body;
+      const { width, height, x, y, shape } = req.body;
 
       if (!commands || !x_pos || !y_pos || !initDirection) {
         return res.status(400).json({ error: "Invalid request parameters" });
       }
 
-      const board = new Board(xTopLeft, yTopLeft, width, height, {
-        x: x,
-        y: y,
-      });
+      const board = new Board(
+        width,
+        height,
+        {
+          x: x,
+          y: y,
+        },
+        shape
+      );
 
-      const move = new Move(commands, x_pos, y_pos, initDirection);
+      const move = new Move(commands, x_pos, y_pos, initDirection, board);
 
       return res.status(200).json({
         board: board,

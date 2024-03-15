@@ -20,6 +20,9 @@ Test Cases
 
 - The robot is on a 100×100 grid at location (0, 0) and facing SOUTH. The robot is given the commands "fflff" and should end up at (2, 2)
 - The robot is on a 50×50 grid at location (1, 1) and facing NORTH. The robot is given the commands "fflff" and should end up at (1, 0)
+
+  - this will not work, since it will meet the 0,0 corner one the movement is done. this test will fail.
+
 - The robot is on a 100×100 grid at location (50, 50) and facing NORTH. The robot is given the commands "fflffrbb" but there is an obstacle at (48, 50) and should end up at (48, 49)
 
 Bonus

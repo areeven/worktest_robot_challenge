@@ -11,7 +11,8 @@ jest.mock("../classes/Move", () => {
           commands: string[] = [],
           x_pos: number,
           y_pos: number,
-          initDirection: EnumeratedDirection
+          initDirection: EnumeratedDirection,
+          board: any
         ) => ({
           executeCommands: jest.fn().mockReturnValue(commands),
           getRobot: jest.fn().mockReturnValue({
@@ -20,6 +21,7 @@ jest.mock("../classes/Move", () => {
               .mockReturnValue({ x: x_pos, y: y_pos }),
           }),
           getDirection: jest.fn().mockReturnValue(initDirection),
+          getBoard: jest.fn().mockReturnValue(board),
         })
       ),
   };
@@ -29,18 +31,14 @@ jest.mock("../classes/Board", () => {
   const Obstacle = require("../classes/Obstacle").Obstacle;
 
   return {
-    Board: jest
-      .fn()
-      .mockImplementation(
-        (xTopLeft, yTopLeft, width, height, obstaclePosition) => {
-          const obstacle = new Obstacle(obstaclePosition.x, obstaclePosition.y);
-          return {
-            getWidth: jest.fn().mockReturnValue(width),
-            getHeight: jest.fn().mockReturnValue(height),
-            getObstacle: jest.fn().mockReturnValue(obstacle),
-          };
-        }
-      ),
+    Board: jest.fn().mockImplementation((width, height, obstaclePosition) => {
+      const obstacle = new Obstacle(obstaclePosition.x, obstaclePosition.y);
+      return {
+        getWidth: jest.fn().mockReturnValue(width),
+        getHeight: jest.fn().mockReturnValue(height),
+        getObstacle: jest.fn().mockReturnValue(obstacle),
+      };
+    }),
   };
 });
 
@@ -57,8 +55,6 @@ describe("RobotController", () => {
         x_pos: 1,
         y_pos: 1,
         initDirection: EnumeratedDirection.north,
-        xTopLeft: 0,
-        yTopLeft: 0,
         width: 5,
         height: 5,
         obstacle: {
