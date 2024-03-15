@@ -8,7 +8,7 @@ afterEach(() => {
 
 describe("Test robot colliding with obstacle", () => {
   test("Robot collides with obstacle and stops", () => {
-    const board = new Board(5, 5, { x: 2, y: 2 }, "flat");
+    const board = new Board(5, 5, { x: 2, y: 2 });
     const move = new Move(
       ["l", "f", "f", "r", "f", "f"],
       0,
@@ -25,7 +25,7 @@ describe("Test robot colliding with obstacle", () => {
 
 describe("Test robot collision", () => {
   test("Robot collides with obstacle", () => {
-    const board = new Board(5, 5, { x: 2, y: 2 }, "flat");
+    const board = new Board(5, 5, { x: 2, y: 2 });
     const move = new Move(
       ["f", "f", "r", "f", "f"],
       0,

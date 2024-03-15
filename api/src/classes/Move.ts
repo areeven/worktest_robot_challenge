@@ -7,7 +7,6 @@ export class Move {
   private direction: EnumeratedDirection;
   private board: Board;
   private currentCommand: string = "";
-  private currentShape: string = "";
 
   constructor(
     commands: string[],
@@ -16,10 +15,9 @@ export class Move {
     initDirection: EnumeratedDirection,
     board: Board
   ) {
-    // Passing x_pos and y_pos directly to the Robot constructor
     this.robot = new Robot(x_pos, y_pos, initDirection);
     this.direction = initDirection;
-    this.board = board; // Set the board instance passed to the constructor
+    this.board = board;
     this.executeCommands(commands);
   }
 
@@ -42,54 +40,20 @@ export class Move {
     return commands;
   }
 
-  public executeShape(shapes: string[]) {
-    for (const shape of shapes) {
-      this.currentShape = shape;
-      console.log(`Shape: ${shape}`);
-      if (!["flat", "globe"].includes(shape)) {
-        throw new Error(`Shape ${shape} is not valid`);
-      }
-      // Add code here to execute the shape
-    }
-    return shapes;
-  }
-
   private checkBoundaries() {
     const currentPosition = this.getRobot().getCurrentPosition();
     const width = this.board.getWidth();
     const height = this.board.getHeight();
-    const obstaclePosition = this.board.getObstacle();
 
-    if (this.currentShape === "flat") {
-      if (
-        currentPosition.x < 0 ||
-        currentPosition.x >= width ||
-        currentPosition.y < 0 ||
-        currentPosition.y >= height
-      ) {
-        return false;
-      } else {
-        return true;
-      }
-    } else if (this.currentShape === "globe") {
-      // Assuming globe shape allows wrapping around both width and height
-      if (currentPosition.x < 0) {
-        currentPosition.x += width;
-      } else if (currentPosition.x >= width) {
-        currentPosition.x -= width;
-      }
-
-      if (currentPosition.y < 0) {
-        currentPosition.y += height;
-      } else if (currentPosition.y >= height) {
-        currentPosition.y -= height;
-      }
-
-      return {
-        x: currentPosition.x,
-        y: currentPosition.y,
-      };
+    if (
+      currentPosition.x < 0 ||
+      currentPosition.x >= width - 1 ||
+      currentPosition.y < 0 ||
+      currentPosition.y >= height - 1
+    ) {
+      return false;
     }
+    return true;
   }
 
   private robotPosition() {
@@ -107,6 +71,9 @@ export class Move {
     const robot = this.robot.getCurrentPosition();
     const obstacle = this.board.getObstacle();
     this.checkBoundaries();
+    if (!robot) {
+      throw new Error("Robot is not in a valid position");
+    }
 
     if (!obstacle || robot.x !== obstacle.x || robot.y !== obstacle.y - 1) {
       if (this.direction === EnumeratedDirection.north && robot.y > 0) {
@@ -132,6 +99,10 @@ export class Move {
     const robot = this.robot.getCurrentPosition();
     const obstacle = this.board.getObstacle();
     this.checkBoundaries();
+    if (!robot) {
+      throw new Error("Robot is not in a valid position");
+    }
+
     if (!obstacle || robot.x !== obstacle.x || robot.y !== obstacle.y + 1) {
       if (
         this.direction === EnumeratedDirection.north &&
@@ -162,6 +133,9 @@ export class Move {
   }
 
   left() {
+    if (!this.direction) {
+      throw new Error("No direction set for robot");
+    }
     if (this.direction === EnumeratedDirection.north) {
       this.direction = EnumeratedDirection.west;
       this.robotPosition();
@@ -178,6 +152,9 @@ export class Move {
   }
 
   right() {
+    if (!this.direction) {
+      throw new Error("No direction set for robot");
+    }
     if (this.direction === EnumeratedDirection.north) {
       this.direction = EnumeratedDirection.east;
       this.robotPosition();
@@ -194,14 +171,23 @@ export class Move {
   }
 
   getRobot() {
+    if (!this.robot) {
+      throw new Error("No robot found");
+    }
     return this.robot;
   }
 
   getDirection() {
+    if (!this.direction) {
+      throw new Error("No direction found");
+    }
     return this.direction;
   }
 
   getCurrentCommand() {
+    if (!this.currentCommand) {
+      throw new Error("No command found");
+    }
     return this.currentCommand;
   }
 }

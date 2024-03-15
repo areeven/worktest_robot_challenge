@@ -7,7 +7,7 @@ afterEach(() => {
 });
 
 describe("Test movements across the board and limitations", () => {
-  const board = new Board(100, 100, { x: 40, y: 40 }, "flat");
+  const board = new Board(100, 100, { x: 40, y: 40 });
   test("Robot moves forward, to the south", () => {
     const move = new Move(["f"], 0, 0, EnumeratedDirection.south, board);
     const robot = move.getRobot();
@@ -15,7 +15,7 @@ describe("Test movements across the board and limitations", () => {
   });
 
   test("Robot moves forward two steps from south starting direction", () => {
-    const board = new Board(100, 100, { x: 40, y: 40 }, "flat");
+    const board = new Board(100, 100, { x: 40, y: 40 });
     const move = new Move(["f", "f"], 0, 0, EnumeratedDirection.south, board);
     const robot = move.getRobot();
     expect(robot.getCurrentPosition()).toEqual({ x: 0, y: 2 });
@@ -35,7 +35,7 @@ describe("Test movements across the board and limitations", () => {
   });
 
   test("Robot takes in multiple commands", () => {
-    const board = new Board(100, 100, { x: 40, y: 40 }, "flat");
+    const board = new Board(100, 100, { x: 40, y: 40 });
     const move = new Move(
       ["f", "f", "l", "f"],
       0,
@@ -50,7 +50,7 @@ describe("Test movements across the board and limitations", () => {
   });
 
   test("Robot is limited to the grid", () => {
-    const board = new Board(100, 100, { x: 40, y: 40 }, "flat");
+    const board = new Board(100, 100, { x: 40, y: 40 });
     const move = new Move(
       ["f", "f", "b", "b", "b"],
       0,
@@ -66,7 +66,7 @@ describe("Test movements across the board and limitations", () => {
 
 describe("Test required movements", () => {
   test("100x100 grid, face south, fflff and end up at 2,2", () => {
-    const board = new Board(100, 100, { x: 40, y: 40 }, "flat");
+    const board = new Board(100, 100, { x: 40, y: 40 });
     const move = new Move(
       ["f", "f", "r", "f", "f"],
       0,
@@ -85,7 +85,7 @@ describe("Test required movements", () => {
   });
 
   test("50x50 grid, location 1,1 face north, fflff, end up 0,0", () => {
-    const board = new Board(50, 50, { x: 40, y: 40 }, "flat");
+    const board = new Board(50, 50, { x: 40, y: 40 });
     const move = new Move(
       ["f", "f", "l", "f", "f"],
       1,
@@ -98,7 +98,7 @@ describe("Test required movements", () => {
   });
 
   test("100x100 grid, location 50,50, face north, obstacle 48,50 should land on 48,49", () => {
-    const board = new Board(100, 100, { x: 48, y: 50 }, "flat");
+    const board = new Board(100, 100, { x: 48, y: 50 });
     const move = new Move(
       ["f", "f", "l", "f", "f", "r", "b", "b"],
       50,
@@ -107,29 +107,5 @@ describe("Test required movements", () => {
       board
     );
     expect(move.getRobot().getCurrentPosition()).toEqual({ x: 48, y: 49 });
-  });
-});
-
-describe("Test shape of board", () => {
-  test("Board is flat", () => {
-    const board = new Board(100, 100, { x: 40, y: 40 }, "flat");
-    expect(board.getShape()).toEqual("flat");
-  });
-
-  test("Board is globe", () => {
-    const board = new Board(100, 100, { x: 40, y: 40 }, "globe");
-    expect(board.getShape()).toEqual("globe");
-  });
-
-  test("Globe warps around", () => {
-    const board = new Board(100, 100, { x: 40, y: 40 }, "globe");
-    const move = new Move(
-      ["f", "f", "f", "f"],
-      98,
-      98,
-      EnumeratedDirection.east,
-      board
-    );
-    expect(move.getRobot().getCurrentPosition()).toEqual({ x: 98, y: 2 });
   });
 });

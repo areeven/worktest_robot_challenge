@@ -6,7 +6,7 @@ afterEach(() => {
   console.log("Test Done");
 });
 
-const board = new Board(100, 100, { x: 40, y: 40 }, "flat");
+const board = new Board(100, 100, { x: 40, y: 40 });
 
 describe("Test robot positioning", () => {
   test("Robot start position is 0, 0", () => {

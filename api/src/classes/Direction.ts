@@ -15,6 +15,9 @@ export class Direction {
   }
 
   getCurrentPosition(): EnumeratedDirection {
+    if (this.positionManager === null || this.positionManager === undefined) {
+      throw new Error("Current position cannot be null or undefined");
+    }
     return this.currentDirection;
   }
 }

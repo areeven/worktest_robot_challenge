@@ -6,6 +6,14 @@
 
 `Start time: 12:44 - 2024-03-12`
 
+To init my project follow these steps after cloning from github
+
+```
+cd api
+npm i
+npm run test
+```
+
 - Develop an api that moves a robot around on a grid (flat surface with defined size)
 - Grid position (0, 0) should be the upper left corner
 - You are given the initial starting point (x,y) of a robot and the direction (N,S,E,W) it is facing.
@@ -21,7 +29,7 @@ Test Cases
 - The robot is on a 100×100 grid at location (0, 0) and facing SOUTH. The robot is given the commands "fflff" and should end up at (2, 2)
 - The robot is on a 50×50 grid at location (1, 1) and facing NORTH. The robot is given the commands "fflff" and should end up at (1, 0)
 
-  - this will not work, since it will meet the 0,0 corner one the movement is done. this test will fail.
+  - this will not work, since it will meet the 0,0 corner once the movement is done. this test will fail.
 
 - The robot is on a 100×100 grid at location (50, 50) and facing NORTH. The robot is given the commands "fflffrbb" but there is an obstacle at (48, 50) and should end up at (48, 49)
 
@@ -128,3 +136,52 @@ I inverted the grid to increase going downwards as well, with incrementing steps
 Continuing on to create an obstacle test to see if the robot will land on the obstacle, then test if it stops before the obstacle.
 
 ![Obstacle](./shared/obstacle.png "Obstacle")
+
+So I ran into some issues and got kinda stuck in just coding so I lost some documentation to that. I will however shortly down here tell you a little about each class I've used. First of all I want to mention I have never used classes in an API so I had to take some time to learn and implement.
+
+### Position.ts
+
+The position is easy, it takes in an x and a y value, then returns it.
+
+### PositionManager.ts
+
+PositionManager uses the value from Position to create a managing system for each different items that needs a position like Robot and Obstacle.
+It also handles the movements up, down, right, left
+
+### Obstacle.ts
+
+The Obstacle makes use of PositionManager that we later use inside the Move class.
+
+### Robot.ts
+
+Same as Obstacle, it takes in the PositionManager as well as the EnumeratedDirection which I created in my utils/interface-folder.
+I also created some methods to decide currentPosition and currentDirection.
+
+### Direction.ts
+
+Direction takes in the robot position and the direction and passes it to where I want to use it.
+
+### Board.ts
+
+Board is created with width and height, and also the obstacle. So when we set a board we also set an obstacle.
+
+### Move.ts
+
+This was the most challenging class to create. Here I wanted to use almost everything I had built, I wanted to use this class to get all positions and to set the desired settings. I created a method to determine what command was to be executed to go forward, backwards or left and right, I also determined this so the Robot would execute depending on what direction it was facing.
+
+### RobotController.ts
+
+I tried to create an easy api call to test the Robot route, I am testing the initial position and direction of the Robot. As well as invalid values.
+
+### Testing
+
+I created alot of tests before creating the code to make sure it would work correctly. I made sure to test every possible outcome and all classes except for Position.
+
+### Evaluation
+
+When I first got the assignment I didn't really know where to start. But then I started breaking it down into smaller pieces, like what classes do I wanna use? What kind of tests do I want to write.
+So I started there and slowly coded my way forward.
+
+I have never used classes in JavaScript or TypeScript so it was a little bit of a challenge but I had alot of fun with it.
+
+I tried a few different ways to build the project, but I changed the code and reformatted a few times to make it more readable and clean.
