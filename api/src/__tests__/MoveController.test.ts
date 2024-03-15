@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { RobotController } from "../controllers/RobotController";
+import { MoveController } from "../controllers/MoveController";
 import { EnumeratedDirection } from "../utils/interfaces/EnumeratedDirection";
 
 jest.mock("../classes/Move", () => {
@@ -42,7 +42,7 @@ jest.mock("../classes/Board", () => {
   };
 });
 
-describe("RobotController", () => {
+describe("MoveController", () => {
   const mockResponse = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn(),
@@ -64,7 +64,7 @@ describe("RobotController", () => {
       },
     } as Request;
 
-    RobotController.moveRobot(mockRequest, mockResponse);
+    MoveController.moveRobot(mockRequest, mockResponse);
 
     expect(mockResponse.status).toHaveBeenCalledWith(200);
     expect(mockResponse.json).toHaveBeenCalledWith(
@@ -79,7 +79,7 @@ describe("RobotController", () => {
   test("should handle missing request parameters", () => {
     const invalidRequest = { body: {} } as Request;
 
-    RobotController.moveRobot(invalidRequest, mockResponse);
+    MoveController.moveRobot(invalidRequest, mockResponse);
 
     expect(mockResponse.status).toHaveBeenCalledWith(400);
     expect(mockResponse.json).toHaveBeenCalledWith({

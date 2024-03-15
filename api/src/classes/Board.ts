@@ -1,9 +1,9 @@
 import { Obstacle } from "./Obstacle";
 
 export class Board {
-  private width: number;
-  private height: number;
-  private obstacle: Obstacle;
+  public width: number;
+  public height: number;
+  public obstacle: Obstacle;
 
   constructor(
     width: number,
