@@ -32,18 +32,30 @@ export class Robot {
   }
 
   moveLeft(steps: number) {
+    if (!steps || steps < 0) {
+      throw new Error("Invalid steps");
+    }
     this.positionManager.moveLeft(steps);
   }
 
   moveRight(steps: number) {
+    if (!steps || steps < 0) {
+      throw new Error("Invalid steps");
+    }
     this.positionManager.moveRight(steps);
   }
 
   moveUp(steps: number) {
+    if (!steps || steps < 0) {
+      throw new Error("Invalid steps");
+    }
     this.positionManager.moveUp(steps);
   }
 
   moveDown(steps: number) {
+    if (!steps || steps < 0) {
+      throw new Error("Invalid steps");
+    }
     this.positionManager.moveDown(steps);
   }
 }

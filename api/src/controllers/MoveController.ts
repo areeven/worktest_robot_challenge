@@ -10,8 +10,8 @@ export class MoveController {
 
       if (
         !commands ||
-        !x_pos ||
-        !y_pos ||
+        typeof x_pos !== "number" ||
+        typeof y_pos !== "number" ||
         !initDirection ||
         !width ||
         !height
