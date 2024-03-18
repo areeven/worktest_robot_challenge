@@ -51,6 +51,7 @@ export class Move {
       currentPosition.y < 0 ||
       currentPosition.y >= height - 1
     ) {
+      console.log("Robot is out of bounds, cannot move further");
       return false;
     }
     return true;
