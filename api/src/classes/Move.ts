@@ -93,6 +93,8 @@ export class Move {
         this.robot.moveLeft(1);
       }
       this.robotPosition();
+    } else {
+      console.log("Robot encountered obstacle, cannot move forward");
     }
   }
 
@@ -130,6 +132,8 @@ export class Move {
         this.robot.moveRight(1);
         this.robotPosition();
       }
+    } else {
+      console.log("Robot encountered obstacle, cannot move backwards");
     }
   }
 

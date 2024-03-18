@@ -137,6 +137,8 @@ Continuing on to create an obstacle test to see if the robot will land on the ob
 
 ![Obstacle](./shared/obstacle.png "Obstacle")
 
+![Postman](./shared/postman_test.png "Postman")
+
 So I ran into some issues and got kinda stuck in just coding so I lost some documentation to that. I will however shortly down here tell you a little about each class I've used. First of all I want to mention I have never used classes in an API so I had to take some time to learn and implement.
 
 ### Position.ts

@@ -35,5 +35,6 @@ describe("Test robot collision", () => {
     );
     const robot = move.getRobot().getCurrentPosition();
     expect(board.getObstacle()).not.toEqual(robot);
+    expect(robot).toEqual({ x: 2, y: 1 });
   });
 });
