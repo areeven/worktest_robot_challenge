@@ -187,3 +187,9 @@ So I started there and slowly coded my way forward.
 I have never used classes in JavaScript or TypeScript so it was a little bit of a challenge but I had alot of fun doing it.
 
 I tried a few different ways to build the project, but I changed the code and reformatted a few times to make it more readable and clean.
+
+## Frontend
+
+Next with TypeScript, trying out GraphQL and tailwind
+
+Will build an interface for the Robot API
