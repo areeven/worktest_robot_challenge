@@ -41,7 +41,7 @@ Hints: use multiple classes, TDD and a healthy approach to VCS
 
 ---
 
-![Design](./shared/design.png "Design")
+![Design](./api/shared/design.png "Design")
 
 ### Interpretation
 
@@ -84,13 +84,13 @@ I created jest.config.ts and tslint.json with configuration.
 I created my first test to check the starting position for the robot, making sure it is correct at x: 0 and y: 0.
 I built the test which failed, I then created the class to set the values for the robot, and the test passes.
 
-![1 passed test](./shared/one_passed_test.png "Passed")
+![1 passed test](./api/shared/one_passed_test.png "Passed")
 
 I had already written some code to make the robot move to the left, right, up, and down, but for TDD purposes, I removed that code and ran the tests first. Which, of course, failed. I added the code again, and this time the test passed.
 
-![failed test](./shared/test_failing.png "Failed")
+![failed test](./api/shared/test_failing.png "Failed")
 
-![5 passed test](./shared/five_passing_tests.png "Passed")
+![5 passed test](./api/shared/five_passing_tests.png "Passed")
 
 ---
 
@@ -123,21 +123,21 @@ describe("Test grid pattern and positioning", () => {
 
 After I ran the test to check for the right turn, it seemed to pass even though I hadn't created that method yet. So I created an error to occur if the command was not valid. After this, the test failed, of course. I then created the method and added the command to the allowed commands.
 
-![Valid commands](./shared/error_handling.png "Validation")
+![Valid commands](./api/shared/error_handling.png "Validation")
 
 So now I want to test if my robot stays within the grid when moving out of bounds.
 This happens,
 
-![Out of bounds](./shared/not_limited.png "Not limited")
+![Out of bounds](./api/shared/not_limited.png "Not limited")
 
 I am testing that the robot will land on the 0,0 position when giving commands: ["f", "f", "b", "b", "b"] but it instead goes out of bounds.
 I inverted the grid to increase going downwards as well, with incrementing steps instead of decrementing.
 
 Continuing on to create an obstacle test to see if the robot will land on the obstacle, then test if it stops before the obstacle.
 
-![Obstacle](./shared/obstacle.png "Obstacle")
+![Obstacle](./api/shared/obstacle.png "Obstacle")
 
-![Postman](./shared/postman_test.png "Postman")
+![Postman](./api/shared/postman_test.png "Postman")
 
 So I ran into some issues and got kinda stuck in just coding so I lost some documentation to that. I will however shortly down here tell you a little about each class I've used. First of all I want to mention I have never used classes in an API so I had to take some time to learn and implement.
 
